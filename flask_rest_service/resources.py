@@ -12,8 +12,7 @@ def search(search_text):
         ee = EmbeddingEngine()
 
         # the positive word vectors
-        sentence = ee.phraser[ee.dp.process_sentence(search_text.split())][0]
-        print("sentence:", sentence)
+        sentence = ee.phraser[ee.dp.process_sentence(search_text.split("&"))][0]
         # the negative word vectors
         n_sentence = None
 
@@ -27,7 +26,6 @@ def search(search_text):
         # return top 50 results
         matlist = ee.most_common_form(most_similar[:100])
         material_names, material_scores, material_counts, _ = zip(*matlist)
-        print("results:", material_names)
         return material_names
     else:
         return None
