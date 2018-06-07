@@ -4,7 +4,7 @@ from flask_restful import Resource
 # from flask_rest_service import app, api, mongo, es
 from bson.objectid import ObjectId
 from flask_rest_service import app, api
-from src.matstract.matstract.models.word_embeddings import EmbeddingEngine, number_to_substring
+from matstract.models.word_embeddings import EmbeddingEngine, number_to_substring
 
 
 def search(search_text):
