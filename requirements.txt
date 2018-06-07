@@ -1,0 +1,33 @@
+Flask
+Flask-PyMongo
+Flask-RESTful
+Jinja2
+MarkupSafe
+Werkzeug
+aniso8601
+gunicorn
+itsdangerous
+pymongo
+pytz
+six
+Flask-Elasticsearch
+-e git://github.com/materialsintelligence/matstract#egg=matstract
+-e git://github.com/materialsintelligence/ChemDataExtractor#egg=chemdataextractor
+
+elasticsearch
+elasticsearch-dsl
+elsapy
+gensim
+matplotlib
+numpy
+pandas
+pymatgen
+sklearn
+sympy
+monty
+regex
+pubchempy
+scopus
+certifi
+dnspython
+tqdm
