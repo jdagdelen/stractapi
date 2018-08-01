@@ -15,7 +15,7 @@ class Abstract:
 
     """
 
-    id = fields.String(required=True)
+    _id = fields.String(required=True)
     # uri = URLFor('abstracts_endpoint')
     title = fields.String()
     authors = fields.List(fields.String())
@@ -25,10 +25,10 @@ class Abstract:
     journal = fields.String()
     keywords = fields.List(fields.String())
     link = fields.String()
-    source = fields.String(default='scopus')
+    # source = fields.String(default='scopus')
 
 
-    def __init__(self, id, title, authors, year, abstract, doi, journal, keywords, link, source='scopus', **kwargs):
+    def __init__(self, _id, title, authors, year, abstract, doi, journal, keywords, link, source='scopus', **kwargs):
         """
         Create an Abstract.
 
@@ -36,7 +36,7 @@ class Abstract:
             id (str): id of the abstract
             title (str): title of the article
             authors ([str]): list of authors
-            date (str): date of publication
+            year (str): year of publication
             abstract (str): abstract for the article
             doi (str): doi for the article
             journal (str): Journal the paper was published in
@@ -44,22 +44,22 @@ class Abstract:
             link (str): The url of the paper.
             source (str): Where the abstract was obtained from (Default is "scopus")
         """
-        self.id = id
+        self._id = _id
         self.title = title
         self.authors = authors
         self.abstract = abstract
-        self.date = year
+        self.year = year
         self.journal = journal
         self.keywords = keywords
         self.doi = doi
-        self.source = source
+        # self.source = source
         self.link = link
 
 
 class AbstractSchema(ma.Schema):
     class Meta:
         # fields to expose
-        fields = ('id', 'title', 'authors', 'abstract', 'date', 'journal', 'keywords', 'doi', 'source', 'link')
+        fields = ('_id', 'title', 'authors', 'abstract', 'year', 'journal', 'keywords', 'doi', 'link')
 
 
 abstract_shema = AbstractSchema()
