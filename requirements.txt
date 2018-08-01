@@ -2,3 +2,16 @@ Flask
 marshmallow
 flask_marshmallow
 gunicorn
+numpy
+pymongo
+elasticsearch
+chemdataextractor
+gensim
+sympy
+pymatgen
+pubchempy
+tqdm
+regex
+sklearn
+matminer
+-e git+https://github.com/jdagdelen/matstract.git#egg=matstract

@@ -1,1 +1,19 @@
+env/
+src/
 *.pyc
+
+# mac specific #
+.DS_store
+
+# pycharm files #
+*/.idea/**
+.idea/**
+.idea/
+
+# build related #
+*.egg-info/
+dist/
+build/
+s3*/
+.eggs/
+.cache/
