@@ -8,6 +8,7 @@ import numpy as np
 
 ma = Marshmallow()
 
+
 class Abstract:
     """
     An abstract and its associated metadata. Mirrors how we store entries in the MongoDB database.
@@ -26,7 +27,6 @@ class Abstract:
     keywords = fields.List(fields.String())
     link = fields.String()
     # source = fields.String(default='scopus')
-
 
     def __init__(self, _id, title, authors, year, abstract, doi, journal, keywords, link, source='scopus', **kwargs):
         """
@@ -178,6 +178,7 @@ class Embedding:
             self.embedding = embedding
         self.compound = compound
 
+
 class EmbeddingSchema(ma.Schema):
     class Meta:
         # Fields to expose
@@ -197,29 +198,27 @@ class ClusterPlot:
     def __init__(self, plot):
         self.plot = plot
 
+
 class ClusterPlotSchema(ma.Schema):
     plot = fields.Dict()
+
 
 class ClusterPlotConfig:
     """
     Parameters for constructing cluster plots.
     """
-
-    heatphrase = fields.String()
-    entity_type = fields.String(default='all')
-    wordphrases = fields.List(fields.String())
-    limit = fields.Integer()
-
     def __init__(self, heatphrase, entity_type, wordphrases, limit):
         self.heatphrase = heatphrase
         self.entity_type = entity_type
         self.wordphrases = wordphrases
         self.limit = limit
 
+
 class ClusterPlotConfigSchema(ma.Schema):
-    class Meta:
-        # Fields to expose
-        fields = ('heatphrase', 'entity_type', 'wordphrases', 'limit')
+    heatphrase = fields.String(default=None, missing=None)
+    entity_type = fields.String(default='all', missing='all')
+    wordphrases = fields.List(fields.String(), default=None, missing=None)
+    limit = fields.Integer(default=-1, missing=-1)  # get all
 
 
 class TrendsPlot:
@@ -234,9 +233,11 @@ class TrendsPlot:
     def __init__(self, plot):
         self.plot = plot
 
+
 class TrendsPlotSchema(ma.Schema):
 
     plot = fields.Dict()
+
 
 class TrendsPlotConfig:
     """
@@ -252,10 +253,12 @@ class TrendsPlotConfig:
         self.begin = begin
         self.end = end
 
+
 class TrendsPlotConfigSchema(ma.Schema):
     class Meta:
         # Fields to expose
         fields = ('filter', 'begin', 'end')
+
 
 class APITest:
     """
@@ -266,6 +269,7 @@ class APITest:
 
     def __init__(self, message):
         self.message = message
+
 
 class TestSchema(ma.Schema):
     message = fields.String()

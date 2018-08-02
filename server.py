@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from stract.api.models import *
 from matstract.models.database import AtlasConnection
 from matstract.models.word_embeddings import EmbeddingEngine
+from matstract.models.cluster_plot import ClusterPlot
 from matstract.models.search import Search
 from matstract.models.similar_materials import SimilarMaterials
 from matstract.models.errors import *
@@ -9,7 +10,7 @@ db = AtlasConnection()
 ee = EmbeddingEngine()
 
 app = Flask(__name__)
-
+cp = ClusterPlot()
 
 
 # endpoint to test
@@ -56,7 +57,7 @@ def get_material_summary(material):
 
 
 # endpoint to similar materials
-@app.route('/api/materials/similar/', methods=['GET'])
+@app.route('/api/materials/similar', methods=['GET'])
 def get_similar_materials():
     material = request.args.get('material', None)
     if material is None:
@@ -90,9 +91,22 @@ def get_synonyms(wordphrase):
 
 
 # endpoint to cluster plots
-@app.route('/api/plots/cluster/', methods=['Get'])
-def get_cluster_plot(config):
-    return NotImplementedError()
+@app.route('/api/plots/cluster', methods=['Get'])
+def get_cluster_plot():
+    """
+    Returns a dictionary that should be the data input to a plotly plot
+    The data is a result of 2d tSNE performed on word embeddings, highlighted
+    according to the config
+    :param config:
+    :return:
+    """
+    request_args = dict()
+    for arg in request.args:
+        request_args[arg] = request.args.get(arg).split(", ") if arg == "wordphrases" else request.args.get(arg)
+
+    # getting the needed args as a dictionary
+    config = ClusterPlotConfigSchema().load(request_args).data
+    return jsonify(cp.get_plot_data(**config))
 
 
 # endpoint to cluster plots
