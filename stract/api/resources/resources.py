@@ -1,7 +1,28 @@
 from stract.api.models import *
 from server import app
+from flask_restful import Resource
+from stract.api import status
+
+class Abstracts(Resource):
+
+    def abort_if_abstract_doesnt_exist(self, ids):
+        # If id not found in MongoDB
+        missing = []
+        for id in ids:
+            if id not in atlas:
+                missing.append(id)
+        if len(missing):
+            abort(status.HTTP_404_NOT_FOUND, message="Cannot find Abstract for id(s) {}".format(missing))
+
+    def get(self):
+        ids = parser.parse_args()['abstract_id'].split(',')
+        self.abort_if_abstract_doesnt_exist(ids)
+        return atlas.get(ids), status.HTTP_501_NOT_IMPLEMENTED
 
 
+class Search(Resource):
+
+    def post(self):
 
 # ### Left off here, need to get rid of reqparser and go with marshmallow ###
 # class Abstracts:

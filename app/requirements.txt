@@ -1,0 +1,17 @@
+Cython==0.27.3
+Flask
+flask_restful
+marshmallow
+flask_marshmallow
+gunicorn
+numpy
+pymongo
+elasticsearch
+gensim
+sympy
+pymatgen
+pubchempy
+tqdm
+regex
+sklearn
+matminer
