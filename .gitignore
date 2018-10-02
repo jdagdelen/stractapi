@@ -17,3 +17,6 @@ build/
 s3*/
 .eggs/
 .cache/
+
+Dockerfile
+*s3-us-west-1.amazonaws.com/*

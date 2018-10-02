@@ -13,7 +13,8 @@ class Test(Resource):
         """ Gets data from the server."""
         # Do something
         response = {
-            "message": message
+            "valid_response": True,
+            "response": message
         }
         response = jsonify(response)
         response.status_code = status.HTTP_200_OK

@@ -150,7 +150,7 @@ class MatSearch(Resource):
                 "valid_response": True,
                 "response": {
                     'original_wordphrase': wordphrase,
-                    'materials': self.EE.find_similar_materials(wordphrase, min_count=top_k)
+                    'materials': self.EE.find_similar_materials(wordphrase, min_count=10)[0:top_k]
                 }
             }
             status_code = status.HTTP_200_OK
